@@ -184,11 +184,19 @@ const NoteApp = () => {
               </p>
             ) : (
               noteData.map((note, i) => {
+                const formattedDate =
+                  note.createdAt && typeof note.createdAt === "string"
+                    ? new Date(note.createdAt).toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })
+                    : "Invalid Date";
                 return (
                   <Link href={`/note-detail/${note.id}`}>
                     <div
                       key={i}
-                      className="flex-[0_0_20%] mr-5 my-5 bg-white rounded-[10px] py-[7px] px-[10px] max-w-[218px] transition duration-200 ease-in-out hover:-translate-y-2 hover:translate-x-1"
+                      className="flex-[0_0_20%] mr-5 my-5 min-w-[218px] bg-white rounded-[10px] py-[7px] px-[10px] max-w-[218px] transition duration-200 ease-in-out hover:-translate-y-2 hover:translate-x-1"
                     >
                       <div>
                         <div className="flex items-center">
@@ -201,7 +209,7 @@ const NoteApp = () => {
                           </h3>
                         </div>
                         <p className="text-[#515151] font-light text-[10px] my-[5px]">
-                          {note["createdAt"]}
+                          {formattedDate}
                         </p>
                       </div>
 

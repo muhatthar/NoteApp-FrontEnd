@@ -31,13 +31,22 @@ export default function NoteDetail({ params }) {
     }
   };
 
+  const formattedDate =
+    notesField.createdAt && typeof notesField.createdAt === "string"
+      ? new Date(notesField.createdAt).toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })
+      : "Invalid Date";
+
   return (
     <main className="py-[46px] px-[100px] items-center">
       <h1 className="h-full text-center text-5xl font-bold text-[#F4A402]">
         {notesField.title}
       </h1>
       <h4 className="h-full text-center text-md mt-1 text-gray-500 font-medium">
-        Created At: {notesField.createdAt}
+        Created At: {formattedDate}
       </h4>
       <p className="h-full text-justify text-xl mt-10 text-white font-medium">
         {notesField.body}
